@@ -1,0 +1,25 @@
+{
+  "name": "openmusic-api",
+  "version": "1.0.0",
+  "description": "Dicoding Submission BE Fundamental",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/un-ro/openmusic-api.git"
+  },
+  "keywords": [
+    "restful-api"
+  ],
+  "author": "un-ro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/un-ro/openmusic-api/issues"
+  },
+  "homepage": "https://github.com/un-ro/openmusic-api#readme",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2"
+  }
+}
