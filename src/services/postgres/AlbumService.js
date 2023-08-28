@@ -1,5 +1,8 @@
 const { nanoid } = require('nanoid');
 const { Pool } = require('pg');
+const InvariantError = require("../../exceptions/InvariantError");
+const NotFoundError = require("../../exceptions/NotFoundError");
+const {albumMapper} = require("../../utils");
 
 class AlbumService {
     constructor() {
@@ -17,7 +20,7 @@ class AlbumService {
         const result = await this._pool.query(query);
 
         if (!result.rows[0].id) {
-            throw new Error('Album gagal ditambahkan');
+            throw new InvariantError('Album gagal ditambahkan');
         }
 
         return result.rows[0].id;
@@ -31,10 +34,10 @@ class AlbumService {
         const result = await this._pool.query(query);
 
         if (!result.rows.length) {
-            throw new Error('Album tidak ditemukan')
+            throw new NotFoundError('Album tidak ditemukan')
         }
 
-        return result.rows;
+        return result.rows.map(albumMapper)[0];
     }
 
     async editAlbumById(id, {name, year}) {
@@ -45,7 +48,7 @@ class AlbumService {
         const result = await this._pool.query(query);
 
         if (!result.rows.length) {
-            throw new Error('Error');
+            throw new NotFoundError('Error');
         }
     }
 
@@ -57,7 +60,7 @@ class AlbumService {
         const result = await this._pool.query(query);
 
         if (!result.rows.length) {
-            throw new Error('Gagal')
+            throw new NotFoundError('Album gagal dihapus')
         }
     }
 }
