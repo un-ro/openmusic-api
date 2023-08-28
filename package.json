@@ -4,6 +4,7 @@
   "description": "Dicoding Submission BE Fundamental",
   "main": "src/index.js",
   "scripts": {
+    "start": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/un-ro/openmusic-api#readme",
   "dependencies": {
-    "@hapi/hapi": "^21.3.2"
+    "@hapi/hapi": "^21.3.2",
+    "dotenv": "^16.3.1"
   }
 }
