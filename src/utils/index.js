@@ -1,15 +1,21 @@
 const currentYear = () => new Date().getFullYear();
 
-const albumMapper = ({
+const songDetailMapper = ({
     id,
-    name,
+    title,
     year,
-    created_at,
-    updated_at
+    performer,
+    genre,
+    duration,
+    album_id
 }) => ({
     id,
-    name,
-    year
+    title,
+    year,
+    performer,
+    genre,
+    duration,
+    albumId: album_id,
 });
 
-module.exports = { currentYear, albumMapper}
+module.exports = { currentYear, songDetailMapper}

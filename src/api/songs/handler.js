@@ -15,39 +15,29 @@ class SongHandler {
         return h.response({
             status: 'success',
             data: {
-                albumId: songId
+                songId: songId
             }
         }).code(201);
     }
 
     async getAllSongsHandler(request) {
-        const { id } = request.params;
-        const album = await this._service.getAlbumById(id);
-
+        const songs = await this._service.getSongs();
         return {
             status: 'success',
             data: {
-                album: {
-                    id: album[0].id,
-                    name: album[0].name,
-                    year: album[0].year
-                }
+                songs: songs
             }
         }
     }
 
     async getSongByIdHandler(request) {
         const { id } = request.params;
-        const album = await this._service.getAlbumById(id);
+        const song = await this._service.getSongById(id);
 
         return {
             status: 'success',
             data: {
-                album: {
-                    id: album[0].id,
-                    name: album[0].name,
-                    year: album[0].year
-                }
+                song: song
             }
         }
     }
@@ -56,22 +46,22 @@ class SongHandler {
         this._validator.validateSongPayload(request.payload);
         const { id } = request.params;
 
-        await this._service.editAlbumById(id, request.payload);
+        await this._service.editSongById(id, request.payload);
 
         return {
             status: 'success',
-            message: 'Album berhasil diperbarui'
+            message: 'Lagu berhasil diperbarui'
         };
     }
 
     async deleteSongByIdHandler(request) {
         const { id } = request.params;
 
-        await this._service.deleteAlbumById(id);
+        await this._service.deleteSongById(id);
 
         return {
             status: 'success',
-            message: 'Album berhasil dihapus'
+            message: 'Lagu berhasil dihapus'
         };
     }
 }
