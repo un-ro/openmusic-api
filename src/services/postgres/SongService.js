@@ -1,37 +1,43 @@
-const { Pool } = require('pg');
-const { nanoid } = require('nanoid');
+const {Pool} = require('pg');
+const {nanoid} = require('nanoid');
 const ClientError = require('../../exceptions/ClientError');
 const NotFoundError = require('../../exceptions/NotFoundError');
-const { songDetailMapper } = require('../../utils');
+const {songDetailMapper} = require('../../utils');
 const InvariantError = require('../../exceptions/InvariantError');
 
 class SongService {
-  constructor() {
-    this._pool = new Pool();
-  }
+  constructor() { this._pool = new Pool(); }
 
   async _isAlbumExist(albumId) {
     // Check if albumId is existed on album table
     const isAlbumExist = await this._pool.query({
-      text: 'SELECT id FROM albums WHERE id = $1',
-      values: [albumId],
+      text : 'SELECT id FROM albums WHERE id = $1',
+      values : [ albumId ],
     });
 
     if (!isAlbumExist.rows[0]) {
-      throw new InvariantError('Lagu gagal ditambahkan, id album tidak ditemukan');
+      throw new InvariantError(
+          'Lagu gagal ditambahkan, id album tidak ditemukan');
     }
   }
 
   async addSong({
-    title, year, genre, performer, duration, albumId,
+    title,
+    year,
+    genre,
+    performer,
+    duration,
+    albumId,
   }) {
-    if (albumId) await this._isAlbumExist(albumId);
+    if (albumId)
+      await this._isAlbumExist(albumId);
 
     const id = `song-${nanoid(8)}`;
 
     const query = {
-      text: 'INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id',
-      values: [id, title, year, genre, performer, duration, albumId],
+      text :
+          'INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id',
+      values : [ id, title, year, genre, performer, duration, albumId ],
     };
     const result = await this._pool.query(query);
 
@@ -42,10 +48,10 @@ class SongService {
     return result.rows[0].id;
   }
 
-  async getSongs({ title, performer }) {
+  async getSongs({title, performer}) {
     const query = {
-      text: 'SELECT id, title, performer FROM songs',
-      values: [],
+      text : 'SELECT id, title, performer FROM songs',
+      values : [],
     };
 
     if (title && performer) {
@@ -65,8 +71,8 @@ class SongService {
 
   async getSongById(id) {
     const query = {
-      text: 'SELECT * FROM songs WHERE id = $1',
-      values: [id],
+      text : 'SELECT * FROM songs WHERE id = $1',
+      values : [ id ],
     };
     const result = await this._pool.query(query);
 
@@ -78,13 +84,20 @@ class SongService {
   }
 
   async editSongById(id, {
-    title, year, genre, performer, duration, albumId,
+    title,
+    year,
+    genre,
+    performer,
+    duration,
+    albumId,
   }) {
-    if (albumId) await this._isAlbumExist(albumId);
+    if (albumId)
+      await this._isAlbumExist(albumId);
 
     const query = {
-      text: 'UPDATE songs SET title = $2, year = $3, genre = $4, performer = $5, duration = $6, album_id = $7, updated_at = now() WHERE id = $1 RETURNING id',
-      values: [id, title, year, genre, performer, duration, albumId],
+      text :
+          'UPDATE songs SET title = $2, year = $3, genre = $4, performer = $5, duration = $6, album_id = $7, updated_at = now() WHERE id = $1 RETURNING id',
+      values : [ id, title, year, genre, performer, duration, albumId ],
     };
     const result = await this._pool.query(query);
 
@@ -95,8 +108,8 @@ class SongService {
 
   async deleteSongById(id) {
     const query = {
-      text: 'DELETE FROM songs WHERE id = $1 RETURNING id',
-      values: [id],
+      text : 'DELETE FROM songs WHERE id = $1 RETURNING id',
+      values : [ id ],
     };
     const result = await this._pool.query(query);
 

@@ -14,41 +14,43 @@ const init = async () => {
   const songsService = new SongsService();
 
   const server = Hapi.server({
-    host: process.env.HOST,
-    port: process.env.PORT,
-    routes: {
-      cors: {
-        origin: ['*'],
+    host : process.env.HOST,
+    port : process.env.PORT,
+    routes : {
+      cors : {
+        origin : [ '*' ],
       },
     },
   });
 
   await server.register([
     {
-      plugin: albums,
-      options: {
-        service: albumsService,
-        validator: AlbumsValidator,
+      plugin : albums,
+      options : {
+        service : albumsService,
+        validator : AlbumsValidator,
       },
     },
     {
-      plugin: songs,
-      options: {
-        service: songsService,
-        validator: SongsValidator,
+      plugin : songs,
+      options : {
+        service : songsService,
+        validator : SongsValidator,
       },
     },
   ]);
 
   server.ext('onPreResponse', (request, h) => {
-    const { response } = request;
+    const {response} = request;
 
     if (response instanceof Error) {
       if (response instanceof ClientError) {
-        return h.response({
-          status: 'fail',
-          message: response.message,
-        }).code(response.statusCode);
+        return h
+            .response({
+              status : 'fail',
+              message : response.message,
+            })
+            .code(response.statusCode);
       }
     }
 
