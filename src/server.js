@@ -44,8 +44,6 @@ const init = async () => {
         const { response } = request;
 
         if (response instanceof Error) {
-            console.log(response);
-
             if (response instanceof ClientError) {
                 return h.response({
                     status: 'fail',

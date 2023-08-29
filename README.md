@@ -3,15 +3,15 @@
 ## Requirement
 
 1. [x] CRUD Album Data 
-2. [ ] CRUD Song Data
-3. [ ] Data Validation
-4. [ ] Error Handling
+2. [x] CRUD Song Data
+3. [x] Data Validation
+4. [x] Error Handling
 5. [x] Using Database (PostgresSQL)
 
 ## Optional Requirement
 
-1. [ ] Show list of songs in Album
-2. [ ] Query Parameter to search song
+1. [x] Show list of songs in Album
+2. [x] Query Parameter to search song
 
 ## Resource
 
