@@ -2,7 +2,7 @@
 
 ## Requirement
 
-1. [x] CRUD Album Data 
+1. [x] CRUD Album Data
 2. [x] CRUD Song Data
 3. [x] Data Validation
 4. [x] Error Handling
