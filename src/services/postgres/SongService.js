@@ -11,13 +11,12 @@ class SongService {
   }
 
   async _isAlbumExist(albumId) {
-    // Check if albumId is existed on album table
-    const isAlbumExist = await this._pool.query({
+    const records = await this._pool.query({
       text: 'SELECT id FROM albums WHERE id = $1',
       values: [albumId],
     });
 
-    if (!isAlbumExist.rows[0]) {
+    if (!records.rows[0]) {
       throw new InvariantError('Lagu gagal ditambahkan, id album tidak ditemukan');
     }
   }
@@ -74,7 +73,7 @@ class SongService {
       throw new NotFoundError('Lagu tidak ditemukan');
     }
 
-    return result.rows.map(songDetailMapper)[0];
+    return songDetailMapper(result.rows[0]);
   }
 
   async editSongById(id, {

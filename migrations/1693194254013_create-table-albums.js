@@ -1,5 +1,3 @@
-exports.shorthands = undefined;
-
 exports.up = (pgm) => {
   pgm.createTable('albums', {
     id: { type: 'VARCHAR(50)', primaryKey: true },
@@ -23,5 +21,5 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable('notes');
+  pgm.dropTable('albums');
 };
