@@ -4,8 +4,9 @@
   "description": "Dicoding Submission BE Fundamental",
   "main": "src/server.js",
   "scripts": {
-    "run-dev": "nodemon src/server.js",
-    "migrate": "node-pg-migrate"
+    "start-dev": "nodemon src/server.js",
+    "migrate": "node-pg-migrate",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
