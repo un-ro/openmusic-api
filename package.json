@@ -2,10 +2,11 @@
   "name": "openmusic-api",
   "version": "1.0.0",
   "description": "Dicoding Submission BE Fundamental",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "nodemon src/server.js",
+    "migrate": "node-pg-migrate",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,17 @@
   },
   "homepage": "https://github.com/un-ro/openmusic-api#readme",
   "dependencies": {
-    "@hapi/hapi": "^21.3.2",
-    "dotenv": "^16.3.1"
+    "@hapi/hapi": "^20.1.0",
+    "dotenv": "^16.3.1",
+    "joi": "^17.9.2",
+    "nanoid": "^3.1.20",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
