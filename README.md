@@ -1,17 +1,22 @@
-# OpenMusic API
+# OpenMusic API v2
 
 ## Requirement
 
 1. [x] CRUD Album Data 
 2. [x] CRUD Song Data
-3. [x] Data Validation
-4. [x] Error Handling
+3. [ ] Data Validation
+4. [ ] Error Handling
 5. [x] Using Database (PostgresSQL)
+6. [ ] Authentication (CRUD User Data)
+7. [ ] CRUD Playlist Data
+8. [ ] Implement Foreign Key
 
 ## Optional Requirement
 
 1. [x] Show list of songs in Album
 2. [x] Query Parameter to search song
+3. [ ] Collaboration Endpoint
+4. [ ] Playlist: Activities feature
 
 ## Resource
 
