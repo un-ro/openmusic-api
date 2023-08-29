@@ -32,13 +32,12 @@ class AlbumService {
     };
     const result = await this._pool.query(albumQuery);
 
-    if (!result.rows.length) {
+    if (!result.rowCount) {
       throw new NotFoundError('Album tidak ditemukan');
     }
 
     const album = result.rows[0];
 
-    // Optional Criteria 1
     const songsQuery = {
       text: 'SELECT id, title, performer FROM songs WHERE album_id = $1',
       values: [id],
